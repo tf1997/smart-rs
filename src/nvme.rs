@@ -1,3 +1,5 @@
+// src/nvme.rs
+
 #[repr(C)]
 #[derive(Debug, Default)]
 pub struct NvmePassthruCommand {
@@ -8,13 +10,25 @@ pub struct NvmePassthruCommand {
 }
 
 #[repr(C)]
-#[derive(Debug, Default, Clone)]
+// --- THIS IS THE CORRECTED STRUCT DEFINITION ---
+// We add `Copy` to the derive macro and define `temperature` as a byte array.
+#[derive(Debug, Default, Clone, Copy)] 
 pub struct NvmeSmartLog {
-    pub critical_warning: u8, pub temperature: u16, pub available_spare: u8,
-    pub available_spare_threshold: u8, pub percentage_used: u8, pub rsvd1: [u8; 26],
-    pub data_units_read: [u8; 16], pub data_units_written: [u8; 16], pub host_read_commands: [u8; 16],
-    pub host_write_commands: [u8; 16], pub controller_busy_time: [u8; 16], pub power_cycles: [u8; 16],
-    pub power_on_hours: [u8; 16], pub unsafe_shutdowns: [u8; 16], pub media_errors: [u8; 16],
+    pub critical_warning: u8,
+    pub temperature: [u8; 2], // Correctly defined as a 2-byte array
+    pub available_spare: u8,
+    pub available_spare_threshold: u8,
+    pub percentage_used: u8,
+    pub rsvd1: [u8; 26],
+    pub data_units_read: [u8; 16],
+    pub data_units_written: [u8; 16],
+    pub host_read_commands: [u8; 16],
+    pub host_write_commands: [u8; 16],
+    pub controller_busy_time: [u8; 16],
+    pub power_cycles: [u8; 16],
+    pub power_on_hours: [u8; 16],
+    pub unsafe_shutdowns: [u8; 16],
+    pub media_errors: [u8; 16],
     pub num_err_log_entries: [u8; 16],
 }
 
