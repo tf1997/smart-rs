@@ -1,0 +1,32 @@
+[package]
+name = "smart-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.60.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_IO",
+    "Win32_Devices",
+    "Win32_Storage_IscsiDisc",
+    "Win32_System_Ioctl",
+    "Win32_System_SystemServices"
+
+] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+# These dependencies will ONLY be included when compiling for Linux.
+libc = "0.2"
+ioctl-rs = "0.2"
+
+[[example]]
+name = "read_smart" 
+path = "./src/examples/read_smart.rs" 
+
+[[example]]
+name = "identify_bus" 
+path = "./src/examples/identify_bus.rs" 
