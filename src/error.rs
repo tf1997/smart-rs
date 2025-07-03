@@ -8,6 +8,7 @@ pub enum SmartError {
     DeviceNotFound(String),
     UnsupportedDevice,
     ParsingError(String),
+    AtaError(u8),
 }
 
 impl fmt::Display for SmartError {
@@ -19,6 +20,7 @@ impl fmt::Display for SmartError {
             SmartError::DeviceNotFound(p) => write!(f, "Device not found: {}", p),
             SmartError::UnsupportedDevice => write!(f, "The device or its protocol is not supported by this library"),
             SmartError::ParsingError(s) => write!(f, "Failed to parse device data: {}", s),
+            SmartError::AtaError(e) => write!(f, "ATA Error: {}", e),
         }
     }
 }

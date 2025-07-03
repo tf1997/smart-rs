@@ -38,6 +38,7 @@ pub struct SmartHealth {
     pub reallocated_sectors: Option<i64>,
     pub percentage_used: Option<u8>,
     pub unsafe_shutdowns: Option<i64>,
+    pub overall_health: Option<String>,
 }
 
 /// Discovers all supported storage devices on the system and retrieves their SMART health information.
